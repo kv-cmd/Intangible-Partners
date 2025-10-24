@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intangible Partners</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+    function toggleMode() {
+      document.documentElement.classList.toggle('dark')
+    }
+  </script>
+</head>
+<body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-white transition-all">
+
+  <header class="flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-800 shadow-md">
+    <h1 class="text-2xl font-bold text-teal-500">Intangible Partners</h1>
+    <nav class="flex gap-4">
+      <a href="index.html">Home</a>
+      <a href="solutions.html">Solutions</a>
+      <a href="platform.html">Platform</a>
+      <a href="industries.html">Industries</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button onclick="toggleMode()" class="ml-4 px-2 py-1 border rounded text-sm">☯ Toggle</button>
+    </nav>
+  </header>
+
+  <section class="text-center py-20 px-4 bg-gradient-to-br from-blue-900 to-teal-600 text-white">
+    <h2 class="text-4xl font-bold mb-4">Automation Beyond AI</h2>
+    <p class="max-w-xl mx-auto mb-6 text-lg">We build autonomous systems, intelligent agents, and the infrastructure that empowers them to operate at scale.</p>
+    <a href="contact.html" class="inline-block bg-white text-black px-6 py-3 rounded font-semibold hover:bg-gray-200">Get a Demo</a>
+  </section>
+
+  <section class="py-12 px-4 max-w-6xl mx-auto">
+    <h3 class="text-2xl font-bold mb-6 text-teal-500">What Makes Us Different</h3>
+    <ul class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <li class="bg-gray-100 dark:bg-gray-800 p-6 rounded shadow">
+        <h4 class="text-lg font-semibold mb-2">Agent Infrastructure</h4>
+        <p>We don't just build AI — we build the systems behind them: routing, memory, monitoring, and control.</p>
+      </li>
+      <li class="bg-gray-100 dark:bg-gray-800 p-6 rounded shadow">
+        <h4 class="text-lg font-semibold mb-2">Scalable Autonomy</h4>
+        <p>From one agent to thousands — our infrastructure grows with your business needs.</p>
+      </li>
+      <li class="bg-gray-100 dark:bg-gray-800 p-6 rounded shadow">
+        <h4 class="text-lg font-semibold mb-2">Future-Proof Systems</h4>
+        <p>Designed for compliance, explainability, and governance from day one.</p>
+      </li>
+    </ul>
+  </section>
+
+  <footer class="bg-gray-200 dark:bg-gray-900 text-center p-4 text-sm text-gray-600 dark:text-gray-400">
+    &copy; 2025 Intangible Partners. All rights reserved.
+  </footer>
+
+</body>
+</html>

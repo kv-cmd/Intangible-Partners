@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Solutions | Intangible Partners</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config = { darkMode: 'class' }; function toggleMode() { document.documentElement.classList.toggle('dark'); }</script>
+</head>
+<body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+<header class="flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-800">
+<h1 class="text-xl font-bold text-teal-500">Intangible Partners</h1>
+<nav class="flex gap-4">
+<a href="index.html">Home</a>
+<a href="solutions.html">Solutions</a>
+<a href="platform.html">Platform</a>
+<a href="industries.html">Industries</a>
+<a href="about.html">About</a>
+<a href="contact.html">Contact</a>
+<button onclick="toggleMode()" class="ml-2 px-2 py-1 border rounded">☯</button>
+</nav>
+</header>
+<main class="max-w-5xl mx-auto py-12 px-4">
+<h2 class="text-3xl font-bold text-teal-400 mb-6">Solutions</h2>
+<div class="grid md:grid-cols-3 gap-6">
+<div class="bg-gray-100 dark:bg-gray-800 p-6 rounded shadow">
+<h3 class="text-xl font-semibold mb-2">Agent Deployment</h3>
+<p>Create task-based intelligent agents that plug into your workflows and learn as they go.</p>
+</div>
+<div class="bg-gray-100 dark:bg-gray-800 p-6 rounded shadow">
+<h3 class="text-xl font-semibold mb-2">Enterprise Integration</h3>
+<p>Link agents with your ERP, CRM, API, or custom systems for seamless execution.</p>
+</div>
+<div class="bg-gray-100 dark:bg-gray-800 p-6 rounded shadow">
+<h3 class="text-xl font-semibold mb-2">Autonomous Orchestration</h3>
+<p>Coordinate, escalate, and monitor agent swarms with automated logic layers.</p>
+</div>
+</div>
+</main>
+</body>
+</html>
