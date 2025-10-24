@@ -1,29 +1,34 @@
 // src/utils/markdown.js
+import fs from 'fs';
+import path from 'path';
 import matter from 'gray-matter';
 import { marked } from 'marked';
 
-// 🔧 Cross-platform safe import for all markdown files
-// Using import.meta.globEager fixes the Windows "Invalid glob import" error
-const blogModules = import.meta.globEager('../content/blog/*.md');
-const caseModules = import.meta.globEager('../content/case-studies/*.md');
+// 📂 Define absolute paths for markdown folders
+const blogDir = path.resolve('src/content/blog');
+const caseDir = path.resolve('src/content/case-studies');
 
-// 🧠 Parse markdown to HTML and extract frontmatter
-function parseMarkdown(modules) {
-  return Object.entries(modules)
-    .map(([path, file]) => {
-      const { data, content } = matter(file.default);
-      const slug = path.split('/').pop().replace('.md', '');
+// 🧠 Function to read markdown files from a directory
+function loadMarkdownFiles(dir) {
+  const files = fs.readdirSync(dir);
+  return files
+    .filter((file) => file.endsWith('.md'))
+    .map((file) => {
+      const filePath = path.join(dir, file);
+      const content = fs.readFileSync(filePath, 'utf8');
+      const { data, content: mdContent } = matter(content);
       return {
-        slug,
+        slug: file.replace('.md', ''),
         title: data.title || 'Untitled',
-        date: data.date || 'Unknown date',
+        date: data.date || 'Unknown',
         summary: data.summary || '',
         metric: data.metric || '',
-        content: marked.parse(content || ''),
+        content: marked.parse(mdContent || ''),
       };
     })
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
-export const posts = parseMarkdown(blogModules);
-export const cases = parseMarkdown(caseModules);
+// 🧩 Exports
+export const posts = loadMarkdownFiles(blogDir);
+export const cases = loadMarkdownFiles(caseDir);
