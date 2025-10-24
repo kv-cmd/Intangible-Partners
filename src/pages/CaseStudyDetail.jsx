@@ -1,25 +1,54 @@
 import React from 'react'
 import { useParams, Link } from 'react-router-dom'
-import ReactMarkdown from 'react-markdown'
-import { loadMarkdownModules } from '../utils/markdown.js'
+import { cases } from '../utils/contentData'
 
-export default function CaseStudyDetail(){
+// ✅ Single case study display page
+export default function CaseStudyDetail() {
   const { slug } = useParams()
-  const [cs, setCS] = React.useState(null)
-  React.useEffect(()=>{
-    loadMarkdownModules('/content/case-studies/*.md').then(all => setCS(all.find(p=>p.slug===slug)))
-  },[slug])
-  if(!cs) return <section className="section"><div className="container-neo">Loading…</div></section>
+  const study = cases.find(c => c.slug === slug)
+
+  if (!study) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen text-center text-gray-200">
+        <h1 className="text-4xl font-bold mb-2">404 - Case Study Not Found</h1>
+        <p className="text-lg mb-6">We couldn’t locate this case study. Please return to the main list.</p>
+        <Link to="/case-studies" className="px-6 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-500 transition-all">
+          Back to Case Studies
+        </Link>
+      </div>
+    )
+  }
+
   return (
-    <section className="section">
-      <div className="container-neo">
-        <Link to="/case-studies" className="btn-ghost mb-6 inline-block">← Back</Link>
-        <h1 className="text-3xl md:text-5xl font-bold">{cs.title}</h1>
-        <div className="text-accent font-extrabold mt-2">{cs.metric}</div>
-        <div className="card p-6 mt-6 prose prose-invert max-w-none">
-          <ReactMarkdown>{cs.content}</ReactMarkdown>
+    <div className="bg-gradient-to-br from-gray-900 to-black min-h-screen text-gray-100 px-6 py-16">
+      <div className="max-w-4xl mx-auto">
+        <Link
+          to="/case-studies"
+          className="text-indigo-400 hover:text-indigo-300 mb-4 inline-block transition-all"
+        >
+          ← Back to All Case Studies
+        </Link>
+
+        <h1 className="text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
+          {study.title}
+        </h1>
+        <p className="text-gray-400 text-sm mb-2">{study.date}</p>
+        <p className="text-lg text-indigo-300 font-semibold mb-8">{study.metric}</p>
+
+        <div
+          className="prose prose-invert prose-lg max-w-none leading-relaxed text-gray-200"
+          dangerouslySetInnerHTML={{ __html: study.content }}
+        />
+
+        <div className="mt-12">
+          <Link
+            to="/case-studies"
+            className="inline-block px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 hover:opacity-90 transition-all text-white font-semibold shadow-lg"
+          >
+            ← Explore More Case Studies
+          </Link>
         </div>
       </div>
-    </section>
+    </div>
   )
 }
