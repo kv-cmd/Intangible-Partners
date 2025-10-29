@@ -1,37 +1,44 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'class', // Enables dark mode toggle using a class on <html>
+  darkMode: 'class', // Allows dark mode toggle with a <html class="dark">
   content: [
     './index.html',
-    './src/**/*.{js,jsx,ts,tsx,md}', // ensures all React and MD files are scanned
+    './src/**/*.{js,jsx,ts,tsx,md}',
   ],
   theme: {
     extend: {
       colors: {
-        void: '#0b0f17',           // background base (dark mode)
-        glass: 'rgba(255,255,255,0.06)', // glassmorphism overlay
-        accent: '#00E0FF',         // electric blue highlight
-        pulse: '#FF4D8D',          // pink accent for hover/focus
-        prism: '#8A2EFF',          // purple glow
-        mint: '#22FFCC',           // mint green for details
-        surface: '#1a1f2e',        // neutral dark background
-        light: '#f8fafc',          // light mode background
+        // === Intangible Partners Core Palette ===
+        navy: '#0a1320',     // main background
+        surface: '#101e33',  // card background
+        border: 'rgba(255,255,255,0.08)',
+        text: '#eaf1ff',     // text white
+        muted: '#a8b3c7',    // subtle gray
+        teal: '#3dd6d0',     // primary accent
+        blue: '#4fa3ff',     // secondary accent
+        // === Optional legacy accents (for glows/hover) ===
+        prism: '#4fa3ff',
+        mint: '#3dd6d0',
+        light: '#f8fafc',
       },
 
       fontFamily: {
-        display: ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif'],
+        display: ['Inter', 'Space Grotesk', 'system-ui', 'sans-serif'],
         body: ['Inter', 'system-ui', 'sans-serif'],
       },
 
       boxShadow: {
-        glow: '0 0 60px rgba(0, 224, 255, 0.25)',
+        glow: '0 0 60px rgba(79, 163, 255, 0.25)',
         card: '0 8px 40px rgba(0,0,0,0.35)',
-        neon: '0 0 25px rgba(138, 46, 255, 0.5)',
+        neon: '0 0 25px rgba(61, 214, 208, 0.5)',
       },
 
       backgroundImage: {
-        stage: 'linear-gradient(180deg, rgba(138,46,255,0.15), rgba(0,0,0,0))',
-        hero: 'radial-gradient(circle at 20% 40%, #8A2EFF 0%, transparent 40%), radial-gradient(circle at 80% 20%, #00E0FF 0%, transparent 40%)',
+        // Hero background gradient using new palette
+        hero:
+          'radial-gradient(circle at 20% 40%, rgba(79,163,255,0.15) 0%, transparent 40%), radial-gradient(circle at 80% 20%, rgba(61,214,208,0.15) 0%, transparent 40%)',
+        stage:
+          'linear-gradient(180deg, rgba(79,163,255,0.15), rgba(0,0,0,0))',
       },
 
       animation: {
@@ -50,8 +57,8 @@ export default {
           '100%': { opacity: 1, transform: 'translateY(0)' },
         },
         pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 15px rgba(0, 224, 255, 0.3)' },
-          '50%': { boxShadow: '0 0 35px rgba(0, 224, 255, 0.6)' },
+          '0%, 100%': { boxShadow: '0 0 15px rgba(79,163,255,0.3)' },
+          '50%': { boxShadow: '0 0 35px rgba(61,214,208,0.6)' },
         },
       },
 
