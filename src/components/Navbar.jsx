@@ -1,37 +1,44 @@
-import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
-import { useTheme } from '../context/theme.jsx'
-import logo from '../assets/logo.svg'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-export default function Navbar(){
-  const { theme, toggle } = useTheme()
-  const items = [
-    { label: 'Home', to: '/' },
-    { label: 'Industries', to: '/industries' },
-    { label: 'Case Studies', to: '/case-studies' },
-    { label: 'Blog', to: '/blog' }
-  ]
+export default function Navbar() {
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+    setTheme(savedTheme);
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    document.documentElement.classList.toggle('dark', newTheme === 'dark');
+    localStorage.setItem('theme', newTheme);
+    setTheme(newTheme);
+  };
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50">
-      <div className="container-neo mt-4">
-        <nav className="card flex items-center justify-between px-4 md:px-6 h-14">
-          <Link to="/" className="flex items-center gap-3">
-            <img src={logo} className="h-7 w-auto" alt="Intangible Partners"/>
-          </Link>
-          <div className="hidden md:flex items-center gap-6 text-sm">
-            {items.map(it => (
-              <NavLink key={it.label} to={it.to} className={({isActive})=>`hover:text-accent ${isActive?'text-accent':''}`}>
-                {it.label}
-              </NavLink>
-            ))}
-          </div>
-          <div className="flex items-center gap-3">
-            <button onClick={toggle} className="btn-ghost text-xs">{theme==='dark'?'Light':'Dark'} Mode</button>
-            <Link to="/contact" className="btn-primary text-sm">Get Started</Link>
-          </div>
-        </nav>
+    <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-glass border-b border-white/10 flex justify-between items-center px-8 py-4">
+      <div className="flex items-center gap-3">
+        <h1 className="text-2xl font-display font-bold text-white tracking-wide">
+          Intangible Partners
+        </h1>
       </div>
-    </header>
-  )
+
+      <div className="flex items-center gap-6 text-gray-200 font-medium">
+        <Link to="/" className="hover:text-accent transition">Home</Link>
+        <Link to="/case-studies" className="hover:text-accent transition">Case Studies</Link>
+        <Link to="/blog" className="hover:text-accent transition">Blog</Link>
+        <Link to="/contact" className="hover:text-accent transition">Contact</Link>
+
+        <button
+          onClick={toggleTheme}
+          className="ml-4 p-2 border border-white/20 rounded-lg hover:border-accent transition"
+          title="Toggle theme"
+        >
+          {theme === 'light' ? '🌙' : '☀️'}
+        </button>
+      </div>
+    </nav>
+  );
 }
